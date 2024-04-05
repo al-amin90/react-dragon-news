@@ -5,16 +5,11 @@ import LeftSideNav from '../shared/LeftSideNav/LeftSideNav';
 import RightSideNav from '../shared/RightSideNav/RightSideNav';
 import BreakingNews from './BreakingNews';
 import News from './News';
+import { useLoaderData } from 'react-router-dom';
 
 
 const Home = () => {
-    const [newss, setNewss] = useState([])
-
-    useEffect(() => {
-        fetch("/news.json")
-            .then(res => res.json())
-            .then(data => setNewss(data))
-    }, [])
+    const newss = useLoaderData();
 
 
 
@@ -29,7 +24,7 @@ const Home = () => {
                     <LeftSideNav></LeftSideNav>
                 </div>
                 <div className=' md:col-span-2 '>
-                    <h2 className='font-semibold text-lg mb-5'>Dragon News Home:</h2>
+                    <h2 className='font-semibold text-lg mb-5'>Dragon News Home</h2>
 
                     {
                         newss.map(news => <News key={news._id} news={news}></News>)

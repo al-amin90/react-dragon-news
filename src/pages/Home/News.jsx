@@ -1,11 +1,12 @@
 import { FaRegBookmark } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 const News = ({ news }) => {
     const { _id, rating, total_view, title, author, thumbnail_url, image_url, details } = news;
-    console.log(news);
+
 
     return (
         <div className="mb-8">
@@ -27,8 +28,14 @@ const News = ({ news }) => {
             <div className='border border-[#F3F3F3] rounded-b-lg p-5'>
                 <h2 className='font-bold mb-5 text-lg text-[#403F3F]'>{title}</h2>
                 <img src={image_url} alt="" />
-                <p className='font-normal text-sm mt-8 mb-1'>{details.slice(0, 250)}.... </p>
-                <a className='mb-4 block cursor-pointer text-orange-600 font-semibold'>Read More</a>
+                {
+                    details.length > 200 ? <div>
+                        <p className='font-normal text-sm mt-8 mb-1'>{details.slice(0, 250)}.... </p>
+                        <Link to={`/news/${_id}`} className='mb-4 block cursor-pointer text-orange-600 font-semibold'>Read More</Link>
+                    </div>
+                        : <p className='font-normal text-sm mt-8 mb-1'>{details}</p>
+                }
+
                 <div className='flex items-center justify-between pt-4 border-t'>
                     <div className='flex items-end'>
                         <div className="rating">

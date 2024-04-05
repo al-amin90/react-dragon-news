@@ -3,18 +3,31 @@ import { FaGoogle, FaGithub, FaFacebookF, FaTwitter, FaInstagram } from "react-i
 import qZone1 from "../../../assets/qZone1.png"
 import qZone2 from "../../../assets/qZone2.png"
 import qZone3 from "../../../assets/qZone3.png"
+import 'animate.css';
+import { useRef } from "react";
 
 const RightSideNav = () => {
+    const loginRef = useRef(null)
+
+
+    const handleEffect = () => {
+        loginRef.current.classList.add("animate__hinge")
+
+        setTimeout(() => {
+            loginRef.current.classList.remove("animate__hinge")
+        }, 2000)
+    }
+
     return (
         <div>
-            <h2 className='font-semibold text-lg'>Login with</h2>
+            <h2 className='font-semibold text-lg  '>Login with</h2>
 
             <div className="mt-5 mb-7">
-                <button className="btn w-full text-blue-400 btn-outline">
+                <button ref={loginRef} onClick={handleEffect} className="btn w-full text-blue-400 btn-outline animate__animated">
                     <FaGoogle></FaGoogle>
                     Login with Google
                 </button>
-                <button className="btn mt-2 w-full text-gray-800 btn-outline">
+                <button className="btn mt-2 w-full animate__animated text-gray-800 btn-outline">
                     <FaGithub ></FaGithub>
                     Login with Github
                 </button>

@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@material-tailwind/react";
 import defaultUser from "../../../assets/user.png"
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../../Providers/Provider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleSingOut = () => {
+        logOut()
+            .then(result => console.log("successfully log out"))
+    }
 
     const navLinks = < >
         <li><Link to="/">Home</Link></li>
@@ -35,9 +43,22 @@ const Navbar = () => {
                         <img src={defaultUser} />
                     </div>
                 </div>
-                <Link to="/login">
-                    <Button className='bg-[#403f3f] py-2 rounded-none px-8 font-semibold'>Login</Button>
-                </Link>
+                {
+                    user ? <Link>
+                        <Button onClick={handleSingOut} className='bg-[#403f3f] py-2 rounded-none px-8 font-semibold'>Log Out
+                        </Button>
+                    </Link>
+                        : <div>
+                            <Link to="/login">
+                                <Button className='bg-[#403f3f] py-2 rounded-none px-8 font-semibold mr-3'>Login
+                                </Button>
+                            </Link>
+                            <Link to="/singup">
+                                <Button className='bg-[#403f3f] py-2 rounded-none px-8 font-semibold'>Sing Up
+                                </Button>
+                            </Link>
+                        </div>
+                }
             </div>
         </div>
     );
